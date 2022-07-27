@@ -1,9 +1,6 @@
-# Ant Design Pro
+# SUIBE MMA [![OSCS Status](https://www.oscs1024.com/platform/badge/suibemath/webpage.svg?size=small)](https://www.oscs1024.com/project/suibemath/webpage?ref=badge_small)
 
 This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
-
-## OSCS
-[![OSCS Status](https://www.oscs1024.com/platform/badge/suibemath/webpage.svg?size=small)](https://www.oscs1024.com/project/suibemath/webpage?ref=badge_small)
 
 ## Environment Prepare
 
