@@ -2,7 +2,7 @@ import Footer from '@/components/Footer';
 import { SYSTEM_LOGO } from '@/constants';
 import { login } from '@/services/ant-design-pro/api';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
+import { LoginForm, ProFormText } from '@ant-design/pro-components';
 import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { history, Link, useModel } from 'umi';
@@ -38,7 +38,7 @@ const Login: React.FC = () => {
     try {
       // 登录
       const user = await login({ ...values, type });
-
+      setUserLoginState(user);
       if (user) {
         const defaultLoginSuccessMessage = '登录成功！';
         message.success(defaultLoginSuccessMessage);
@@ -52,9 +52,9 @@ const Login: React.FC = () => {
         };
         history.push(redirect || '/');
         return;
+      } else {
+        throw new Error('login error');
       }
-
-      setUserLoginState(user);
     } catch (error) {
       const defaultLoginFailureMessage = '登录失败，请重试！';
       message.error(defaultLoginFailureMessage);
@@ -74,7 +74,7 @@ const Login: React.FC = () => {
             </a>
           }
           initialValues={{
-            autoLogin: true,
+            autoLogin: false,
           }}
           onFinish={async (values) => {
             await handleSubmit(values as API.LoginParams);
@@ -124,16 +124,11 @@ const Login: React.FC = () => {
               />
             </>
           )}
-
-          {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
           <div
             style={{
               marginBottom: 24,
             }}
           >
-            <ProFormCheckbox noStyle name="autoLogin">
-              自动登录
-            </ProFormCheckbox>
             <Link
               style={{
                 float: 'right',

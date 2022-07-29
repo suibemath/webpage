@@ -18,10 +18,9 @@ const Register: React.FC = () => {
       message.error('两次输入的密码不一致');
       return;
     }
-
+    const id = await register(values);
     try {
       // 注册
-      const id = await register(values);
 
       if (id === '注册成功') {
         const defaultLoginSuccessMessage = '注册成功！';
@@ -39,8 +38,7 @@ const Register: React.FC = () => {
         throw new Error('register error id = ${id}');
       }
     } catch (error) {
-      const defaultLoginFailureMessage = '注册失败，请重试！';
-      message.error(defaultLoginFailureMessage);
+      message.error(id);
     }
   };
 
@@ -78,11 +76,16 @@ const Register: React.FC = () => {
                   size: 'large',
                   prefix: <UserOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder={'请输入账号'}
+                placeholder={'请输入账号(8位学号)'}
                 rules={[
                   {
                     required: true,
                     message: '账号是必填项！',
+                  },
+                  {
+                    len: 8,
+                    type: 'string',
+                    message: '账号为8位学号',
                   },
                 ]}
               />
@@ -92,7 +95,7 @@ const Register: React.FC = () => {
                   size: 'large',
                   prefix: <LockOutlined className={styles.prefixIcon} />,
                 }}
-                placeholder={'请输入密码'}
+                placeholder={'请输入密码(首位必须是字母)'}
                 rules={[
                   {
                     required: true,

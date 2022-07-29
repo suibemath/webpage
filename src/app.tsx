@@ -21,7 +21,7 @@ export const initialStateConfig = {
 };
 
 export const request: RequestConfig = {
-  timeout: 10000,
+  timeout: 10000000,
 };
 
 /**
