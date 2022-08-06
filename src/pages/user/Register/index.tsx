@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import { SYSTEM_LOGO } from '@/constants';
-import { register } from '@/services/ant-design-pro/api';
+import { register } from '@/services/api';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
 import { message, Tabs } from 'antd';
@@ -30,7 +30,7 @@ const Register: React.FC = () => {
         if (!history) return;
         const { query } = history.location;
         history.push({
-          pathname: 'user/login',
+          pathname: 'login',
           query,
         });
         return;

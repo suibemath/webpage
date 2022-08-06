@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import { SYSTEM_LOGO } from '@/constants';
-import { login } from '@/services/ant-design-pro/api';
+import { login } from '@/services/api';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
 import { Alert, message, Tabs } from 'antd';

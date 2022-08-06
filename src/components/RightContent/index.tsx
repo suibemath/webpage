@@ -1,63 +1,56 @@
-import { QuestionCircleOutlined } from '@ant-design/icons';
-import { Space } from 'antd';
-import React from 'react';
-import { useModel } from 'umi';
-import HeaderSearch from '../HeaderSearch';
-import Avatar from './AvatarDropdown';
+import type { Settings as ProSettings } from '@ant-design/pro-layout';
+import React, { useState } from 'react';
+import { Button, Dropdown, Menu } from 'antd';
+import AvatarDropdown from './AvatarDropdown';
+import HeaderSearch from '@/components/HeaderSearch';
+import { Link, useLocation } from 'umi';
+import { isMobile } from '@/utils/utils';
 import styles from './index.less';
-export type SiderTheme = 'light' | 'dark';
 
-const GlobalHeaderRight: React.FC = () => {
-  const { initialState } = useModel('@@initialState');
+type GlobalHeaderRightProps = Partial<ProSettings>;
 
-  if (!initialState || !initialState.settings) {
-    return null;
-  }
+/**
+ * 全局菜单右侧
+ * @constructor
+ */
+const GlobalHeaderRight: React.FC<GlobalHeaderRightProps> = () => {
+  const location = useLocation();
+  // @ts-ignore
+  const [searchText, setSearchText] = useState<string>(location.query.q);
 
-  const { navTheme, layout } = initialState.settings;
-  let className = styles.right;
-
-  if ((navTheme === 'dark' && layout === 'top') || layout === 'mix') {
-    className = `${styles.right}  ${styles.dark}`;
-  }
-
+  const menu = (
+    <Menu>
+      <Menu.Item key="1">
+        <Link to="/addtopics" target="_blank">
+          上传题目
+        </Link>
+      </Menu.Item>
+    </Menu>
+  );
   return (
-    <Space className={className}>
-      <HeaderSearch
-        className={`${styles.action} ${styles.search}`}
-        placeholder="站内搜索"
-        defaultValue="umi ui"
-        options={[
-          {
-            label: <a href="https://umijs.org/zh/guide/umi-ui.html">umi ui</a>,
-            value: 'umi ui',
-          },
-          {
-            label: <a href="next.ant.design">Ant Design</a>,
-            value: 'Ant Design',
-          },
-          {
-            label: <a href="https://protable.ant.design/">Pro Table</a>,
-            value: 'Pro Table',
-          },
-          {
-            label: <a href="https://prolayout.ant.design/">Pro Layout</a>,
-            value: 'Pro Layout',
-          },
-        ]} // onSearch={value => {
-        //   console.log('input', value);
-        // }}
-      />
-      <span
-        className={styles.action}
-        onClick={() => {
-          window.open('https://pro.ant.design/docs/getting-started');
-        }}
-      >
-        <QuestionCircleOutlined />
-      </span>
-      <Avatar />
-    </Space>
+    <div className={styles.right}>
+      <div style={{ width: '40vw' }}>
+        <HeaderSearch
+          value={searchText}
+          placeholder="全站搜索面试题目"
+          onChange={(value) => setSearchText(value)}
+        />
+      </div>
+      {!isMobile() && (
+        <Dropdown overlay={menu} placement="bottomCenter">
+          <Link to="/addtopics" target="_blank">
+            <Button
+              type="primary"
+              className="uploadDropdown"
+              style={{ marginLeft: 24, marginRight: 8 }}
+            >
+              上传
+            </Button>
+          </Link>
+        </Dropdown>
+      )}
+      <AvatarDropdown />
+    </div>
   );
 };
 

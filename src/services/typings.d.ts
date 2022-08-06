@@ -7,14 +7,21 @@ declare namespace API {
     username: string;
     userAccount: string;
     avatarUrl?: string;
-    gender: number;
+    gender: boolean;
     email: string;
     userStatus: number;
     userRole: number;
+    score: number;
     createTime: Date;
   };
 
   type LoginResult = {
+    status?: string;
+    type?: string;
+    currentAuthority?: string;
+  };
+
+  type UpdateResult = {
     status?: string;
     type?: string;
     currentAuthority?: string;
