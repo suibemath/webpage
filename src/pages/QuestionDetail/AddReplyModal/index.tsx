@@ -1,10 +1,10 @@
-import {Button, Col, Form, message, Modal, Row} from 'antd';
-import React, {useEffect, useState} from 'react';
-import type {CurrentUser} from '@/model/user';
-import {useModel} from '@@/plugin-model/useModel';
+import { Button, Col, Form, message, Modal, Row } from 'antd';
+import React, { useEffect, useState } from 'react';
+import type { CurrentUser } from '@/model/user';
+import { useModel } from '@@/plugin-model/useModel';
 import './style.less';
-import {writeReply} from "@/services/reply";
-import {ProFormTextArea} from "@ant-design/pro-form";
+import { writeReply } from '@/services/reply';
+import { ProFormTextArea } from '@ant-design/pro-form';
 
 interface AddCommentModalProps {
   visible: boolean;
@@ -19,7 +19,7 @@ interface AddCommentModalProps {
  * @author liyupi
  */
 const AddReplyModal: React.FC<AddCommentModalProps> = (props) => {
-  const { visible, topicId, onClose} = props;
+  const { visible, topicId, onClose } = props;
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [replyContent, setReplyContent] = useState<string>('');
   const { initialState } = useModel('@@initialState');
@@ -46,12 +46,13 @@ const AddReplyModal: React.FC<AddCommentModalProps> = (props) => {
       topicId,
       userId: currentUser.id,
     });
-    if (res==="回复成功") {
+    if (res === '回复成功') {
       message.success('感谢您的回答');
-      setSubmitting(false)
+      setSubmitting(false);
+      onClose();
     } else {
       message.error('回答失败，请重试！');
-      setSubmitting(false)
+      setSubmitting(false);
     }
   };
 

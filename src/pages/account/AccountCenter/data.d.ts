@@ -57,6 +57,7 @@ export interface ListItemDataType {
   topicLikes: number;
   isStared: boolean;
   userId: number;
+  replyNum: number;
   isDelete: boolean;
   createTime: Date;
   updateTime: Date;

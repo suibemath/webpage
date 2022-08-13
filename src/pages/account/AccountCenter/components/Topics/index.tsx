@@ -1,10 +1,11 @@
 import React from 'react';
-import {LikeOutlined, MessageFilled} from '@ant-design/icons';
-import {List} from 'antd';
-import ArticleListContent from '../ArticleListContent';
-import type {ListItemDataType} from '../../data.d';
+import { LikeOutlined, MessageFilled } from '@ant-design/icons';
+import { List, Tag } from 'antd';
+import type { ListItemDataType } from '../../data.d';
 import styles from './index.less';
-import {getMyTopic} from "@/services/topicList";
+import { getMyTopic } from '@/services/topicList';
+import { Link } from 'umi';
+import TopicListContent from '@/pages/TopciList/components/TopicListContent';
 
 const list = await getMyTopic();
 
@@ -24,23 +25,38 @@ const Articles: React.FC = () => {
       className={styles.articleList}
       rowKey="topicId"
       itemLayout="vertical"
+      pagination={{
+        onChange: (page) => {
+          console.log(page);
+        },
+        pageSize: 10,
+      }}
       dataSource={list}
       renderItem={(item) => (
         <List.Item
           key={item.topicId}
           actions={[
             <IconText key="like" icon={<LikeOutlined />} text={item.topicLikes} />,
-            <IconText key="message" icon={<MessageFilled />} text={"评论的数量"} />,
+            <IconText key="message" icon={<MessageFilled />} text={item.replyNum} />,
           ]}
         >
           <List.Item.Meta
             title={
-              <a className={styles.listItemMetaTitle} href={"#"}>
+              <Link
+                className={styles.listItemMetaTitle}
+                to={`/qd/${item.topicId}`}
+                target={'_blank'}
+              >
                 {item.topicTitle}
-              </a>
+              </Link>
+            }
+            description={
+              <Tag visible={item.isStared} color={'red'}>
+                {item.isStared}
+              </Tag>
             }
           />
-          <ArticleListContent data={item} />
+          <TopicListContent data={item} />
         </List.Item>
       )}
     />
