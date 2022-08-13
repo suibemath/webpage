@@ -2,14 +2,18 @@
  * 题目类型
  */
 export interface TopicType {
+  topicId: number;
   topicTitle?: string;
   topicContent: string;
   topicLikes: number;
   isStared: boolean;
   userId: number;
   isDelete: boolean;
-  _createTime: Date;
-  _updateTime: Date;
+  replyNum: number;
+  createTime: Date;
+  updateTime: Date;
 }
 
 type UploadResult = string;
+type TopicPagesResult = number;
+type getTopicByIdType = number;

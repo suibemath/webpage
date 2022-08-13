@@ -3,10 +3,10 @@
 
 declare namespace API {
   type CurrentUser = {
-    id: string;
+    id: number;
     username: string;
     userAccount: string;
-    avatarUrl?: string;
+    avatarUrl: string;
     gender: boolean;
     email: string;
     userStatus: number;
@@ -56,10 +56,6 @@ declare namespace API {
     success?: boolean;
   };
 
-  type FakeCaptcha = {
-    code?: number;
-    status?: string;
-  };
 
   type LoginParams = {
     userAccount?: string;
@@ -75,14 +71,6 @@ declare namespace API {
     type?: string;
   };
 
-  type ErrorResponse = {
-    /** 业务约定的错误码 */
-    errorCode: string;
-    /** 业务上的错误信息 */
-    errorMessage?: string;
-    /** 业务上的请求是否成功 */
-    success?: boolean;
-  };
 
   type NoticeIconList = {
     data?: NoticeIconItem[];
@@ -90,7 +78,12 @@ declare namespace API {
     total?: number;
     success?: boolean;
   };
-
+  type TopicIdType = {
+    topicId: number;
+  };
+  type UserIdType = {
+    userId: number;
+  };
   type NoticeIconItemType = 'notification' | 'message' | 'event';
 
   type NoticeIconItem = {

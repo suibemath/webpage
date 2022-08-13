@@ -62,7 +62,7 @@ const AccountCenter: React.FC<RouteChildrenProps> = () => {
               <div>
                 <div className={styles.avatarHolder}>
                   <img alt="" src={currentUser.avatarUrl} />
-                  <div className={styles.name}>{currentUser.username}</div>
+                  <div className={styles.name}>{currentUser.username} {currentUser.gender}</div>
                   {/*<div>{currentUser?.signature}</div>*/}
                   <div>积分:{currentUser.score}</div>
                 </div>

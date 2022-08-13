@@ -113,8 +113,8 @@ const BaseView: React.FC = () => {
               />
               <Form.Item name="gender" label="性别" rules={[{ required: true }]}>
                 <Select placeholder={_gender} allowClear>
-                  <Option value="false">男</Option>
-                  <Option value="true">女</Option>
+                  <Option value="♂">男</Option>
+                  <Option value="♀">女</Option>
                 </Select>
               </Form.Item>
               {/*<ProFormTextArea*/}

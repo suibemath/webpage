@@ -10,10 +10,30 @@ export async function currentUser(options?: { [key: string]: any }) {
   });
 }
 
+/** 根据Id获取用户信息 POST /api/user/searchByUserId */
+export async function searchByUserId(body: API.UserIdType,options?: { [key: string]: any }) {
+  return request<API.CurrentUser>('/api/user/searchByUserId', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** 退出登录接口 POST /api/login/outLogin */
 export async function outLogin(options?: { [key: string]: any }) {
   return request<Record<string, any>>('/api/login/outLogin', {
     method: 'POST',
+    ...(options || {}),
+  });
+}
+
+/** 退出登录接口 POST /api/login/logout */
+export async function logout(options?: { [key: string]: any }) {
+  return request<Record<string, any>>('/api/login/logout', {
+    method: 'GET',
     ...(options || {}),
   });
 }

@@ -1,28 +1,27 @@
 import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
-import type { Settings as LayoutSettings } from '@ant-design/pro-components';
-import { PageLoading, SettingDrawer } from '@ant-design/pro-components';
-import type { RunTimeLayoutConfig } from 'umi';
-import { history } from 'umi';
-import { RequestConfig } from 'umi';
+import type {Settings as LayoutSettings} from '@ant-design/pro-components';
+import {PageLoading, SettingDrawer} from '@ant-design/pro-components';
+import type {RunTimeLayoutConfig} from 'umi';
+import {history} from 'umi';
 import defaultSettings from '../config/defaultSettings';
-import { currentUser as queryCurrentUser } from './services/api';
+import {currentUser as queryCurrentUser} from './services/api';
 
 const loginPath = '/user/login';
 
 /**
  * 无需用户登录态的页面
  */
-const WHITE_LIST = ['/user/register', loginPath, '/home'];
+const WHITE_LIST = ['/user/register', loginPath, '/home','/qd/:id'];
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
   loading: <PageLoading />,
 };
 
-export const request: RequestConfig = {
-  timeout: 10000,
-};
+// export const request: RequestConfig = {
+//   timeout: 10000,
+// };
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state

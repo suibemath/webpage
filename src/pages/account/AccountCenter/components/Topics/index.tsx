@@ -1,11 +1,12 @@
 import React from 'react';
-import { StarTwoTone, LikeOutlined, MessageFilled } from '@ant-design/icons';
-import { useRequest } from 'umi';
-import { List, Tag } from 'antd';
+import {LikeOutlined, MessageFilled} from '@ant-design/icons';
+import {List} from 'antd';
 import ArticleListContent from '../ArticleListContent';
-import type { ListItemDataType } from '../../data.d';
-import { queryFakeList } from '../../service';
+import type {ListItemDataType} from '../../data.d';
 import styles from './index.less';
+import {getMyTopic} from "@/services/topicList";
+
+const list = await getMyTopic();
 
 const Articles: React.FC = () => {
   const IconText: React.FC<{
@@ -17,40 +18,26 @@ const Articles: React.FC = () => {
     </span>
   );
 
-  // 获取tab列表数据
-  const { data: listData } = useRequest(() => {
-    return queryFakeList({
-      count: 30,
-    });
-  });
   return (
     <List<ListItemDataType>
       size="large"
       className={styles.articleList}
-      rowKey="id"
+      rowKey="topicId"
       itemLayout="vertical"
-      dataSource={listData?.list || []}
+      dataSource={list}
       renderItem={(item) => (
         <List.Item
-          key={item.id}
+          key={item.topicId}
           actions={[
-            <IconText key="star" icon={<StarTwoTone />} text={item.star} />,
-            <IconText key="like" icon={<LikeOutlined />} text={item.like} />,
-            <IconText key="message" icon={<MessageFilled />} text={item.message} />,
+            <IconText key="like" icon={<LikeOutlined />} text={item.topicLikes} />,
+            <IconText key="message" icon={<MessageFilled />} text={"评论的数量"} />,
           ]}
         >
           <List.Item.Meta
             title={
-              <a className={styles.listItemMetaTitle} href={item.href}>
-                {item.title}
+              <a className={styles.listItemMetaTitle} href={"#"}>
+                {item.topicTitle}
               </a>
-            }
-            description={
-              <span>
-                <Tag>Ant Design</Tag>
-                <Tag>设计语言</Tag>
-                <Tag>蚂蚁金服</Tag>
-              </span>
             }
           />
           <ArticleListContent data={item} />

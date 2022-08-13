@@ -19,10 +19,10 @@ export default [
     ],
   },
   {
-    path: '/welcome',
     name: '首页',
     icon: 'smile',
-    component: './Welcome',
+    path: '/welcome',
+    component: './TopciList',
   },
   {
     path: '/account',
@@ -68,6 +68,12 @@ export default [
     icon: 'table',
     path: '/list',
     component: './TableList',
+  },
+  {
+    name: '题目详情',
+    path: '/qd/:id',
+    component: './QuestionDetail',
+    hideInMenu: true,
   },
   {
     path: '/',
