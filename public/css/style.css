@@ -429,7 +429,7 @@ h3 {
 }
 
 #labs-grid>div:nth-child(1) .img-cont {
-  background-image: url("https://www.wootec.top/img/avatar.png");
+  background-image: url("https://s2.loli.net/2022/08/16/Vq38Mk2rUeoDutp.jpg");
 }
 
 #labs-grid>div:nth-child(2).fade-up {
@@ -438,7 +438,7 @@ h3 {
 }
 
 #labs-grid>div:nth-child(2) .img-cont {
-  background-image: url("https://www.wootec.top/img/links/eqqie.jpg");
+  background-image: url("https://s2.loli.net/2022/08/16/VyXaCWRfDHh7PET.jpg");
 }
 
 #labs-grid>div:nth-child(3).fade-up {
@@ -447,7 +447,7 @@ h3 {
 }
 
 #labs-grid>div:nth-child(3) .img-cont {
-  background-image: url("https://blackw4tch.github.io/image/avatar.jpeg");
+  background-image: url("https://s2.loli.net/2022/08/16/2H4D9TaVsNbiYqe.jpg");
 }
 
 #labs-grid>div:nth-child(4).fade-up {
@@ -587,13 +587,11 @@ textarea {
 }
 
 .font-small {
-  font-size     : 1.15rem;
   letter-spacing: 0.3px;
-  line-height   : 1.75rem;
+
 }
 
 .font-med {
-  font-size     : 1.4rem;
   letter-spacing: 1px;
   font-weight   : 300;
 }
@@ -624,3 +622,31 @@ button, .button {
   padding: 0.6rem 2rem;
   color: white;
 }
+
+
+.imgBox img {
+  width: 75%;
+  height: 400px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.img1 {
+  display: block;
+}
+
+.img2 {
+  display: none;
+}
+
+.img3 {
+  display: none;
+}
+.img4 {
+  display: none;
+}
+.img5 {
+  display: none;
+}
+
+

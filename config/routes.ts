@@ -45,24 +45,24 @@ export default [
       },
     ],
   },
-  {
-    path: '/admin',
-    name: '管理页',
-    icon: 'crown',
-    access: 'canAdmin',
-    component: './Admin',
-    routes: [
-      {
-        path: '/admin/user-manage',
-        name: '用户管理',
-        icon: 'smile',
-        component: './Admin/UserManage',
-      },
-      {
-        component: './404',
-      },
-    ],
-  },
+  // {
+  //   path: '/admin',
+  //   name: '管理页',
+  //   icon: 'crown',
+  //   access: 'canAdmin',
+  //   component: './Admin',
+  //   routes: [
+  //     {
+  //       path: '/admin/user-manage',
+  //       name: '用户管理',
+  //       icon: 'smile',
+  //       component: './Admin/UserManage',
+  //     },
+  //     {
+  //       component: './404',
+  //     },
+  //   ],
+  // },
   {
     name: '查询表格',
     icon: 'table',
