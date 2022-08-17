@@ -5,22 +5,29 @@ import {currentUser as queryCurrentUser} from '@/services/api';
 import {TopicType} from '@/model/topic';
 import React from 'react';
 import {addTopics} from '@/services/addTopics';
-import initialState from "@@/plugin-initial-state/models/initialState";
+import {useModel} from "@@/plugin-model/useModel";
+import {CurrentUser} from "@/model/user";
 
 const fetchUserInfo = async () => {
     const user = await queryCurrentUser();
     return user;
 };
 
-const currentUser = await fetchUserInfo();
-// @ts-ignore
-const _id = currentUser.id;
+
 
 const AddTopics: React.FC = () => {
+  const { initialState } = useModel('@@initialState');
+  const { currentUser = {} as CurrentUser } = initialState || {};
+
   const handleFinish = async (values: TopicType) => {
-    const res = await addTopics(values);
+    const {topicTitle,topicContent} = values;
+    const res = await addTopics({
+      topicTitle: topicTitle,
+      topicContent: topicContent,
+      userId: currentUser.id,
+    });
     if (res == '上传成功') {
-      message.success(res);
+      message.success(res+"，恭喜你获得10点积分");
       const newCurrentUser = await fetchUserInfo();
       setInitialState({ ...initialState, currentUser: newCurrentUser });
     } else {
@@ -40,7 +47,6 @@ const AddTopics: React.FC = () => {
           initialValues={{ public: '1' }}
           onFinish={handleFinish}
         >
-          <ProFormText width="md" name="userId"  disabled label="用户唯一ID码" initialValue={_id} />
           <ProFormText
             width="md"
             label="标题"
@@ -57,6 +63,7 @@ const AddTopics: React.FC = () => {
           <ProFormTextArea
             label="内容"
             width="xl"
+            style={{whiteSpace:'pre-wrap'}}
             name="topicContent"
             rules={[
               {

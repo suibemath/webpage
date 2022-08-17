@@ -1,5 +1,5 @@
 import {request} from 'umi';
-import {TopicType} from "@/model/topic";
+import {TopicLikesType, TopicType} from "@/model/topic";
 
 /** 返回所有题目 GET /api/topic/getTotalTopic */
 export async function getTotalTopics(options?: { [key: string]: any }) {
@@ -17,9 +17,21 @@ export async function getMyTopic(options?: { [key: string]: any }) {
   });
 }
 
-/** 根据Id获取用户信息 POST /api/topic/getTopicById */
+/** 根据Id获取题目信息 POST /api/topic/getTopicById */
 export async function getTopic(body: API.TopicIdType,options?: { [key: string]: any }) {
   return request<TopicType>('/api/topic/getTopicById', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 根据Id获取题目点赞数 POST /api/topic/getTopicById */
+export async function getTopicLikes(body: API.TopicIdType,options?: { [key: string]: any }) {
+  return request<TopicLikesType>('/api/topic/getTopicById', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -40,6 +40,8 @@ const ReplyListContent: React.FC<TopicListContentProps> = ({ reply }) => {
       const newReply = await replyLike(reply);
       if (newReply == null) {
         message.error('点赞出错');
+      }else{
+        message.success("操作成功");
       }
     }
   };

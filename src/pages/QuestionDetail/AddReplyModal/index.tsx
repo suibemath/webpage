@@ -1,10 +1,9 @@
-import { Button, Col, Form, message, Modal, Row } from 'antd';
-import React, { useEffect, useState } from 'react';
-import type { CurrentUser } from '@/model/user';
-import { useModel } from '@@/plugin-model/useModel';
+import {Button, Col, Form, Input, message, Modal, Row} from 'antd';
+import React, {useEffect, useState} from 'react';
+import type {CurrentUser} from '@/model/user';
+import {useModel} from '@@/plugin-model/useModel';
 import './style.less';
-import { writeReply } from '@/services/reply';
-import { ProFormTextArea } from '@ant-design/pro-form';
+import {writeReply} from '@/services/reply';
 
 interface AddCommentModalProps {
   visible: boolean;
@@ -27,6 +26,7 @@ const AddReplyModal: React.FC<AddCommentModalProps> = (props) => {
   const [form] = Form.useForm();
   const _replyContent = Form.useWatch('replyContent', form);
 
+
   useEffect(() => {
     if (!visible || !topicId || !currentUser.id) {
       return;
@@ -47,7 +47,7 @@ const AddReplyModal: React.FC<AddCommentModalProps> = (props) => {
       userId: currentUser.id,
     });
     if (res === '回复成功') {
-      message.success('感谢您的回答');
+      message.success('回复成功，恭喜你获得8点积分');
       setSubmitting(false);
       onClose();
     } else {
@@ -60,6 +60,7 @@ const AddReplyModal: React.FC<AddCommentModalProps> = (props) => {
     onClose();
     setReplyContent('');
   };
+
 
   return (
     <Modal
@@ -74,18 +75,12 @@ const AddReplyModal: React.FC<AddCommentModalProps> = (props) => {
     >
       <Form form={form}>
         <Form.Item name="replyContent">
-          <ProFormTextArea
-            label="内容"
-            width="xl"
+          <Input.TextArea
             name="replyContent"
-            rules={[
-              {
-                required: true,
-                message: '请输入具体内容',
-              },
-            ]}
             placeholder="请输入具体内容"
-          />
+            autoSize={{ minRows: 4,maxRows: 12}}
+            style={{whiteSpace:'pre-wrap'}}
+            showCount />
         </Form.Item>
       </Form>
       <Form.Item>

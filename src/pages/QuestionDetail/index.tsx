@@ -43,7 +43,6 @@ const QuestionDetail: React.FC = () => {
     } else {
       message.error('题目加载失败，请刷新重试');
     }
-
     setLoading(false);
   };
   useEffect(() => {

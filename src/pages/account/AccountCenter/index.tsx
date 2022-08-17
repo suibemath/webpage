@@ -15,7 +15,7 @@ const operationTabList = [
     key: 'topics',
     tab: (
       <span>
-        我的题目<span style={{ fontSize: 14 }}>(8)</span>
+        我的题目<span style={{ fontSize: 14 }}></span>
       </span>
     ),
   },
@@ -23,7 +23,7 @@ const operationTabList = [
     key: 'answers',
     tab: (
       <span>
-        我的回复<span style={{ fontSize: 14 }}>(8)</span>
+        我的回复<span style={{ fontSize: 14 }}></span>
       </span>
     ),
   },
@@ -63,8 +63,8 @@ const AccountCenter: React.FC<RouteChildrenProps> = () => {
                 <div className={styles.avatarHolder}>
                   <img alt="" src={currentUser.avatarUrl} />
                   <div className={styles.name}>{currentUser.username} {currentUser.gender}</div>
-                  {/*<div>{currentUser?.signature}</div>*/}
                   <div>积分:{currentUser.score}</div>
+                  <div>个人简介:  {currentUser?.selfIntroduction}</div>
                 </div>
                 <Divider dashed />
                 <Divider style={{ marginTop: 16 }} dashed />

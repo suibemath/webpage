@@ -72,6 +72,7 @@ const  ReplyList: React.FC<ReplyListProps> = (props) => {
           dataSource={list}
           renderItem={(item) => (
             <List.Item
+              style={{whiteSpace:'pre-wrap'}}
               key={item.replyId}
             >
               <ReplyListContent reply={item}/>

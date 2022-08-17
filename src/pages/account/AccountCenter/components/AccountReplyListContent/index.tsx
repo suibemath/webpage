@@ -7,6 +7,8 @@ import { searchByUserId } from '@/services/api';
 import { TopicType } from '@/model/topic';
 import { getTopic } from '@/services/topicList';
 import { LikeOutlined } from '@ant-design/icons';
+import {Link} from "umi";
+import styles from "@/pages/account/AccountCenter/components/Topics/index.less";
 
 type TopicListContentProps = {
   reply: ReplyType;
@@ -56,7 +58,7 @@ const AccountReplyListContent: React.FC<TopicListContentProps> = ({ reply }) => 
       author={<a>{user.username}</a>}
       actions={[
         <IconText key="like" icon={<LikeOutlined />} text={reply.replyLikes} />,
-        <span key="comment-nested-reply-to">在话题“{topic.topicTitle}”下的回复</span>,
+        <span key="comment-nested-reply-to"><Link className={styles.listItemMetaTitle} to={`/qd/${topic.topicId}`}>“{topic.topicTitle}”</Link></span>,
       ]}
     ></Comment>
   );

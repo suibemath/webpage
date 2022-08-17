@@ -9,9 +9,9 @@ declare namespace API {
     avatarUrl: string;
     gender: boolean;
     email: string;
-    userStatus: number;
     userRole: number;
     score: number;
+    selfIntroduction: string;
     createTime: Date;
   };
 

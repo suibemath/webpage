@@ -15,6 +15,7 @@ export interface CurrentUser {
   email: string;
   userStatus: number;
   userRole: number;
+  selfIntroduction: string;
   score: number;
   createTime: Date;
 }

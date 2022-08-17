@@ -61,6 +61,7 @@ const  TopciList: FC = () => {
           dataSource={list}
           renderItem={(item) => (
             <List.Item
+              style={{whiteSpace:'pre-wrap'}}
               key={item.topicId}
               actions={[
                 <IconText key="like" type="like-o" text={item.topicLikes}/>,
@@ -69,7 +70,7 @@ const  TopciList: FC = () => {
             >
               <List.Item.Meta
                 title={
-                  <Link className={styles.listItemMetaTitle} to={`/qd/${item.topicId}`} target={'_blank'}>
+                  <Link className={styles.listItemMetaTitle} to={`/qd/${item.topicId}`}>
                     {item.topicTitle}
                   </Link>
                 }

@@ -22,7 +22,7 @@ const Articles: React.FC = () => {
       }}
       dataSource={list}
       renderItem={(item) => (
-        <List.Item key={item.topicId}>
+        <List.Item key={item.topicId} style={{whiteSpace:'pre-wrap'}}>
           <AccountReplyListContent reply={item} />
         </List.Item>
       )}

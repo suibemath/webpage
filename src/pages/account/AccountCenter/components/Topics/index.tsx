@@ -45,7 +45,6 @@ const Articles: React.FC = () => {
               <Link
                 className={styles.listItemMetaTitle}
                 to={`/qd/${item.topicId}`}
-                target={'_blank'}
               >
                 {item.topicTitle}
               </Link>

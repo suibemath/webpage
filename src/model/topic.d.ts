@@ -14,6 +14,12 @@ export interface TopicType {
   updateTime: Date;
 }
 
+export interface simpleTopicType {
+  topicTitle?: string;
+  topicContent: string;
+  userId: number;
+}
+
+
 type UploadResult = string;
-type TopicPagesResult = number;
-type getTopicByIdType = number;
+type TopicLikesType = number;

@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import './index.less';
 import {TopicType} from "@/model/topic";
 import {LikeOutlined, MessageOutlined, StarOutlined} from "@ant-design/icons";
-import {topicLike} from "@/services/topicList";
+import {getTopicLikes, topicLike} from "@/services/topicList";
 import message from "antd/es/message";
 import {currentUser as queryCurrentUser} from "@/services/api";
 
@@ -22,10 +22,11 @@ const currentUser = await fetchUserInfo();
  * 题目详细信息（只读，给试卷、题目详情等页面使用）
  * @param props
  * @constructor
- * @author liyupi
+ * @author gexiaoxiao
  */
 const QuestionDetailCard: React.FC<QuestionDetailCardProps> = (props) => {
   const { topic = {} as TopicType} = props;
+  const [loading, setLoading] = useState<boolean>(false);
   const IconText: React.FC<{
     type: string;
     text: React.ReactNode;
@@ -56,38 +57,26 @@ const QuestionDetailCard: React.FC<QuestionDetailCardProps> = (props) => {
         return null;
     }
   };
-  // const doThumbUp = async (id: string) => {
-  //
-  //   if (thumbLoading) {
-  //     return;
-  //   }
-  //   setThumbLoading(true);
-  //   const res = await thumbUpComment(id);
-  //   if (res === 1 || res === -1) {
-  //     comment.thumbNum = (comment.thumbNum ?? 0) + res;
-  //     const thumbCommentIds = currentUser.thumbCommentIds ?? [];
-  //     if (res > 0) {
-  //       thumbCommentIds.push(comment._id);
-  //     } else {
-  //       thumbCommentIds.splice(thumbCommentIds.indexOf(comment._id), 1);
-  //     }
-  //     const newCurrentUser = { ...currentUser, thumbCommentIds };
-  //     setInitialState({ ...initialState, currentUser: newCurrentUser });
-  //   } else {
-  //     message.error('操作失败，请刷新重试');
-  //   }
-  //   setThumbLoading(false);
-  // };
-
   const onClickLikes = async ()=>{
+    setLoading(true);
     if ( currentUser.id === topic.userId ){
       message.info("您不能给自己的题目点赞")
     }else{
       const newTopic = await topicLike(topic);
       if(newTopic== null){
         message.error("点赞出错")
+      }else{
+        const IdType = {
+          topicId: topic.topicId,
+        }
+        const res = await getTopicLikes(IdType);
+        if (res == null){
+          message.error("点赞出错");
+        }else{
+        }
       }
     }
+    setLoading(false);
   }
   const questionTitle = topic.topicTitle;
   const [ellipsis] = useState(true);
@@ -96,11 +85,11 @@ const QuestionDetailCard: React.FC<QuestionDetailCardProps> = (props) => {
       <Typography.Title level={4} style={{ marginBottom: 16 }}>
         {questionTitle}
       </Typography.Title>
-      <Typography.Paragraph ellipsis={ellipsis ? { rows: 2, expandable: true, symbol: 'more' } : false}>
+      <Typography.Paragraph style={{whiteSpace:'pre-wrap'}} ellipsis={ellipsis ? { rows: 2, expandable: true, symbol: 'more' } : false}>
         {topic.topicContent}
       </Typography.Paragraph>
       <Typography.Paragraph>
-        <Button onClick={onClickLikes}><IconText key="like" type="like-o" text={topic.topicLikes}/></Button>
+        <Button loading={loading} onClick={onClickLikes}><IconText key="like" type="like-o" text={topic.topicLikes}/></Button>
       </Typography.Paragraph>
     </div>
   );
