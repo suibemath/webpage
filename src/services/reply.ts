@@ -1,5 +1,5 @@
 import { request } from '@@/plugin-request/request';
-import { Replyres, ReplyType, writeReplyType } from '@/model/reply';
+import {ReplyIdType, Replyres, ReplyType, writeReplyType} from '@/model/reply';
 import { TopicType } from '@/model/topic';
 
 /** 根据题目获取用户信息 POST /api/reply/getTopicReply */
@@ -45,3 +45,29 @@ export async function getMyReply(options?: { [key: string]: any }) {
     ...(options || {}),
   });
 }
+
+/** 作者删除回复 POST /api/reply/deleteByAuthor */
+export async function deleteReplyByAuthor(body: ReplyIdType, options?: { [key: string]: any }) {
+  return request<ReplyIdType>('/api/reply/deleteByAuthor', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 管理员删除回复 POST /api/reply/deleteByAuthor */
+export async function deleteReplyByManager(body: ReplyIdType, options?: { [key: string]: any }) {
+  return request<ReplyIdType>('/api/reply/deleteByAuthor', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+

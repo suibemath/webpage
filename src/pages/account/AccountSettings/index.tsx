@@ -3,6 +3,7 @@ import { GridContent } from '@ant-design/pro-layout';
 import { Menu } from 'antd';
 import BaseView from './components/base';
 import styles from './style.less';
+import PasswordView from "@/pages/account/AccountSettings/components/changePassword";
 
 const { Item } = Menu;
 
@@ -15,6 +16,7 @@ type AccountSettingsState = {
 const AccountSettings: React.FC = () => {
   const menuMap: Record<string, React.ReactNode> = {
     base: '基本设置',
+    changePassword: '修改密码'
   };
 
   const [initConfig, setInitConfig] = useState<AccountSettingsState>({
@@ -56,11 +58,12 @@ const AccountSettings: React.FC = () => {
 
   const renderChildren = () => {
     const { selectKey } = initConfig;
-    switch (selectKey) {
-      case 'base':
-        return <BaseView />;
-      default:
-        return null;
+    if (selectKey === 'base') {
+      return <BaseView/>;
+    } else if (selectKey === 'changePassword') {
+      return <PasswordView/>;
+    } else {
+      return null;
     }
   };
 

@@ -11,6 +11,7 @@ import {formatPartDateTimeStr} from '@/utils/utils';
 import {GridContent} from '@ant-design/pro-components';
 import QuestionDetailCard from "@/pages/QuestionDetail/QuestionDetailCard";
 import ReplyList from "@/pages/QuestionDetail/ReplyList";
+import {Link} from "umi";
 
 
 const QuestionDetail: React.FC = () => {
@@ -82,7 +83,10 @@ const QuestionDetail: React.FC = () => {
               上传者：
               <Space>
                 <Avatar src={user.avatarUrl} />
-                <span>{user.username}  {user.gender}</span>
+                <Link to={`/us/${user.id}`} target="_blank">
+                  <span>{user.username}  {user.gender}</span>
+                </Link>
+
               </Space>
             </p>
           </Card>

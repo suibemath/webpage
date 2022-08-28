@@ -1,5 +1,5 @@
 import {request} from 'umi';
-import {TopicLikesType, TopicType} from "@/model/topic";
+import {TopicType} from "@/model/topic";
 
 /** 返回所有题目 GET /api/topic/getTotalTopic */
 export async function getTotalTopics(options?: { [key: string]: any }) {
@@ -30,8 +30,20 @@ export async function getTopic(body: API.TopicIdType,options?: { [key: string]: 
 }
 
 /** 根据Id获取题目点赞数 POST /api/topic/getTopicById */
-export async function getTopicLikes(body: API.TopicIdType,options?: { [key: string]: any }) {
-  return request<TopicLikesType>('/api/topic/getTopicById', {
+export async function getTopicById(body: API.TopicIdType,options?: { [key: string]: any }) {
+  return request<TopicType>('/api/topic/getTopicById', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 根据Id获取题目点赞数 POST /api/topic/searchTitle */
+export async function searchTitle(body: API.SearchTopic,options?: { [key: string]: any }) {
+  return request<TopicType[]>('/api/topic/searchTitle', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -44,6 +56,30 @@ export async function getTopicLikes(body: API.TopicIdType,options?: { [key: stri
 /** 点赞题目 POST /api/topic/like */
 export async function topicLike(body: TopicType,options?: { [key: string]: any }) {
   return request<TopicType>('/api/topic/like', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 作者删除题目 POST /api/topic/deleteByAuthor */
+export async function deleteByAuthor(body: API.TopicIdType,options?: { [key: string]: any }) {
+  return request<API.TopicIdType>('/api/topic/deleteByAuthor', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 管理员删除题目 POST /api/topic/deleteByManager */
+export async function deleteTopicByManager(body: API.TopicIdType,options?: { [key: string]: any }) {
+  return request<API.TopicIdType>('/api/topic/deleteByManager', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

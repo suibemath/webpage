@@ -47,7 +47,7 @@ const AddReplyModal: React.FC<AddCommentModalProps> = (props) => {
       userId: currentUser.id,
     });
     if (res === '回复成功') {
-      message.success('回复成功，恭喜你获得8点积分');
+      message.success('回复成功，恭喜你获得5点积分');
       setSubmitting(false);
       onClose();
     } else {

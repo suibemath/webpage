@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import './index.less';
 import {TopicType} from "@/model/topic";
 import {LikeOutlined, MessageOutlined, StarOutlined} from "@ant-design/icons";
-import {getTopicLikes, topicLike} from "@/services/topicList";
+import {getTopicById, topicLike} from "@/services/topicList";
 import message from "antd/es/message";
 import {currentUser as queryCurrentUser} from "@/services/api";
 
@@ -27,6 +27,7 @@ const currentUser = await fetchUserInfo();
 const QuestionDetailCard: React.FC<QuestionDetailCardProps> = (props) => {
   const { topic = {} as TopicType} = props;
   const [loading, setLoading] = useState<boolean>(false);
+  const [topicLikes, setTopicLikes] = useState<number>(topic.topicLikes);
   const IconText: React.FC<{
     type: string;
     text: React.ReactNode;
@@ -69,10 +70,11 @@ const QuestionDetailCard: React.FC<QuestionDetailCardProps> = (props) => {
         const IdType = {
           topicId: topic.topicId,
         }
-        const res = await getTopicLikes(IdType);
+        const res = await getTopicById(IdType);
         if (res == null){
           message.error("点赞出错");
         }else{
+          setTopicLikes(res.topicLikes);
         }
       }
     }
@@ -89,7 +91,7 @@ const QuestionDetailCard: React.FC<QuestionDetailCardProps> = (props) => {
         {topic.topicContent}
       </Typography.Paragraph>
       <Typography.Paragraph>
-        <Button loading={loading} onClick={onClickLikes}><IconText key="like" type="like-o" text={topic.topicLikes}/></Button>
+        <Button loading={loading} onClick={onClickLikes}><IconText key="like" type="like-o" text={topicLikes}/></Button>
       </Typography.Paragraph>
     </div>
   );

@@ -37,7 +37,8 @@ const BaseView: React.FC = () => {
       email: email,
       score: currentUser.score,
       selfIntroduction: selfIntroduction,
-      createTime: currentUser.createTime
+      createTime: currentUser.createTime,
+      monthScore: currentUser.monthScore,
     });
     if (user) {
       message.success('更新基本信息成功');
@@ -47,7 +48,6 @@ const BaseView: React.FC = () => {
     if (!user) {
       message.error('修改信息失败');
     }
-    window.location.reload();
   };
   return (
     <div className={styles.baseView}>

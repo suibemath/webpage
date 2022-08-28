@@ -25,6 +25,23 @@ export default [
     component: './TopciList',
   },
   {
+    name: '排名',
+    icon: 'table',
+    path: '/rank',
+    routes: [
+      {
+        path: 'rank/month',
+        name:'月排名',
+        component: './Rank/MonthRank'
+    },
+      {
+        path: 'rank/total',
+        name: '总排名',
+        component: './Rank/TotalRank'
+      }
+    ]
+  },
+  {
     path: '/account',
     name: '个人',
     icon: 'book',
@@ -45,34 +62,52 @@ export default [
       },
     ],
   },
-  // {
-  //   path: '/admin',
-  //   name: '管理页',
-  //   icon: 'crown',
-  //   access: 'canAdmin',
-  //   component: './Admin',
-  //   routes: [
-  //     {
-  //       path: '/admin/user-manage',
-  //       name: '用户管理',
-  //       icon: 'smile',
-  //       component: './Admin/UserManage',
-  //     },
-  //     {
-  //       component: './404',
-  //     },
-  //   ],
-  // },
   {
-    name: '查询表格',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
+    path: '/admin',
+    name: '管理页',
+    icon: 'crown',
+    access: 'canAdmin',
+    component: './Admin',
+    routes: [
+      {
+        path: '/admin/user-manage',
+        name: '用户管理',
+        icon: 'smile',
+        component: './Admin/userManage',
+      },
+      {
+        path: '/admin/topic-manage',
+        name: '题目管理',
+        icon: 'smile',
+        component: './Admin/topicManage',
+      },
+      {
+        path: '/admin/reset-score',
+        name: '重置积分',
+        icon: 'smile',
+        component: './Admin/ResetScore',
+      },
+      {
+        component: './404',
+      },
+    ],
   },
   {
     name: '题目详情',
     path: '/qd/:id',
     component: './QuestionDetail',
+    hideInMenu: true,
+  },
+  {
+    name: '题目大全',
+    path: '/questions',
+    hideInMenu: true,
+    component: './Questions',
+  },
+  {
+    name: '用户详情',
+    path: '/us/:id',
+    component: './UserDetail',
     hideInMenu: true,
   },
   {

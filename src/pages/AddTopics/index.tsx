@@ -33,7 +33,6 @@ const AddTopics: React.FC = () => {
     } else {
       message.error('上传失败，请刷新重试');
     }
-    window.location.reload();
   };
 
   return (

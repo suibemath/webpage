@@ -7,12 +7,29 @@ declare namespace API {
     username: string;
     userAccount: string;
     avatarUrl: string;
-    gender: boolean;
+    gender: string;
     email: string;
     userRole: number;
     score: number;
+    monthScore: number;
     selfIntroduction: string;
     createTime: Date;
+  };
+
+  type ResetScore = {
+    id: number;
+    userRole: number;
+    userPassword: number;
+  };
+  type SearchTopic = {
+    searchTitle: any;
+  };
+
+  type SearchUser = {
+    current: number,
+    pageSize: number,
+    username: string;
+    userAccount: string;
   };
 
   type LoginResult = {
@@ -69,6 +86,18 @@ declare namespace API {
     userPassword?: string;
     checkPassword?: string;
     type?: string;
+  };
+
+  type ChangePasswordParams = {
+    id: number,
+    oldPassword: string,
+    newPassword: string,
+    newCheckPassword: string,
+  };
+
+  type ChangeScoreParams = {
+    score: number;
+    id: number;
   };
 
 

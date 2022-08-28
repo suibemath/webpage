@@ -30,5 +30,7 @@ export interface writeReplyType {
   topicId: number;
   replyContent: string;
 }
-
+type ReplyIdType = {
+  replyId: number;
+};
 type Replyres = string;

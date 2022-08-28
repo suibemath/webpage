@@ -1,4 +1,4 @@
-import { Card, Col, Divider, Row } from 'antd';
+import {Card, Col, Divider, Row, Tag} from 'antd';
 import React, { useState } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import type { RouteChildrenProps } from 'react-router';
@@ -63,8 +63,8 @@ const AccountCenter: React.FC<RouteChildrenProps> = () => {
                 <div className={styles.avatarHolder}>
                   <img alt="" src={currentUser.avatarUrl} />
                   <div className={styles.name}>{currentUser.username} {currentUser.gender}</div>
-                  <div>积分:{currentUser.score}</div>
-                  <div>个人简介:  {currentUser?.selfIntroduction}</div>
+                  <div><Tag color="red">{!currentUser.userRole ? '协会会员' : '管理员'}</Tag>积分:{currentUser.score}</div>
+                  <div>个人简介:  {!currentUser.selfIntroduction ? '这个人很懒没有简介~' : currentUser.selfIntroduction}</div>
                 </div>
                 <Divider dashed />
                 <Divider style={{ marginTop: 16 }} dashed />

@@ -11,12 +11,12 @@ export interface CurrentUser {
   username: string;
   userAccount: string;
   avatarUrl: string;
-  gender: boolean;
+  gender: string;
   email: string;
-  userStatus: number;
   userRole: number;
   selfIntroduction: string;
   score: number;
+  monthScore: number;
   createTime: Date;
 }
 

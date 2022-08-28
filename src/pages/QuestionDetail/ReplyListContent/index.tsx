@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import moment from 'moment';
-import { ReplyType } from '@/model/reply';
-import { Avatar, Button, Comment, message } from 'antd';
-import { CurrentUser } from '@/model/user';
-import { currentUser as queryCurrentUser, searchByUserId } from '@/services/api';
-import { LikeOutlined } from '@ant-design/icons';
-import { replyLike } from '@/services/reply';
+import {ReplyType} from '@/model/reply';
+import {Avatar, Button, Comment, message, Space, Tag} from 'antd';
+import {CurrentUser} from '@/model/user';
+import {currentUser as queryCurrentUser, searchByUserId} from '@/services/api';
+import {LikeOutlined} from '@ant-design/icons';
+import {deleteReplyByManager, replyLike} from '@/services/reply';
+import {Link} from "umi";
 
 type TopicListContentProps = {
   reply: ReplyType;
@@ -18,6 +19,8 @@ const fetchUserInfo = async () => {
 const currentUser = await fetchUserInfo();
 const ReplyListContent: React.FC<TopicListContentProps> = ({ reply }) => {
   const [user, setUser] = useState<CurrentUser>({} as CurrentUser);
+  const [replyLikes, setReplyLikes] = useState<number>(reply.replyLikes);
+
   const loadData = async () => {
     const IdType = {
       userId: reply.userId,
@@ -41,7 +44,7 @@ const ReplyListContent: React.FC<TopicListContentProps> = ({ reply }) => {
       if (newReply == null) {
         message.error('点赞出错');
       }else{
-        message.success("操作成功");
+        setReplyLikes(newReply.replyLikes)
       }
     }
   };
@@ -61,20 +64,32 @@ const ReplyListContent: React.FC<TopicListContentProps> = ({ reply }) => {
         return null;
     }
   };
+  const onDelete = async ()=>{
+    const ReplyIdType = {
+      replyId: reply.replyId
+    }
+    await deleteReplyByManager(ReplyIdType);
+    message.success("删除成功");
+  }
 
   return (
     <Comment
       content={reply.replyContent}
       datetime={moment(reply.createTime).format('YYYY-MM-DD HH:mm')}
-      avatar={<Avatar src={user.avatarUrl} alt={user.username} />}
+      avatar={<Link to={`/us/${user.id}`} target="_blank"><Avatar src={user.avatarUrl} alt={user.username} /></Link>}
       author={<a>{user.username}</a>}
       actions={[
+        <Space size="middle">
         <Button onClick={onClickLikes}>
-          <IconText key="like" type="like-o" text={reply.replyLikes} />
-        </Button>,
+          <IconText key="like" type="like-o" text={replyLikes} />
+        </Button>
+          <a href="#"><Tag visible={currentUser.userRole == 1} onClick={onDelete} color="#f50">删除</Tag></a>
+        </Space>,
       ]}
     ></Comment>
   );
 };
 
 export default ReplyListContent;
+
+

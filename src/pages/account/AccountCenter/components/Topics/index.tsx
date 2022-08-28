@@ -1,11 +1,11 @@
 import React from 'react';
-import { LikeOutlined, MessageFilled } from '@ant-design/icons';
-import { List, Tag } from 'antd';
-import type { ListItemDataType } from '../../data.d';
+import {LikeOutlined, MessageFilled} from '@ant-design/icons';
+import {List, Tag} from 'antd';
+import type {ListItemDataType} from '../../data.d';
 import styles from './index.less';
-import { getMyTopic } from '@/services/topicList';
-import { Link } from 'umi';
-import TopicListContent from '@/pages/TopciList/components/TopicListContent';
+import {getMyTopic} from '@/services/topicList';
+import {Link} from 'umi';
+import TopicAccountContent from "@/pages/account/AccountCenter/components/TopicAccountContent";
 
 const list = await getMyTopic();
 
@@ -18,6 +18,8 @@ const Articles: React.FC = () => {
       {icon} {text}
     </span>
   );
+
+
 
   return (
     <List<ListItemDataType>
@@ -55,7 +57,7 @@ const Articles: React.FC = () => {
               </Tag>
             }
           />
-          <TopicListContent data={item} />
+          <TopicAccountContent data={item} />
         </List.Item>
       )}
     />
