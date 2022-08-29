@@ -12,12 +12,6 @@ const  MonthRank: FC = () => {
   return (
       <List
         dataSource={data}
-        pagination={{
-          onChange: page => {
-            console.log(page);
-          },
-          pageSize: 10,
-        }}
         renderItem={item => (
           <List.Item key={item.id}>
             <List.Item.Meta
@@ -32,7 +26,7 @@ const  MonthRank: FC = () => {
               </Space>
             }
             />
-              <div>{item.score}</div>
+              <div>{item.monthScore}</div>
           </List.Item>
         )}
       />

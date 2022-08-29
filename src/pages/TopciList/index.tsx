@@ -1,5 +1,5 @@
 import {LikeOutlined, MessageOutlined, StarOutlined} from '@ant-design/icons';
-import {Card, List, Tag} from 'antd';
+import {Card, List, Space, Tag} from 'antd';
 import type {FC} from 'react';
 import React from 'react';
 import TopicListContent from './components/TopicListContent';
@@ -70,12 +70,12 @@ const  TopciList: FC = () => {
             >
               <List.Item.Meta
                 title={
+                <Space>
+                  <Tag visible={item.isStared} color={"green"}>{item.isStared}</Tag>
                   <Link className={styles.listItemMetaTitle} to={`/qd/${item.topicId}`}>
                     {item.topicTitle}
                   </Link>
-                }
-                description={
-                  <Tag visible={item.isStared} color={"red"}>{item.isStared}</Tag>
+                </Space>
                 }
               />
               <TopicListContent data={item}/>

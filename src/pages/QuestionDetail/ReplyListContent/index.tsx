@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import moment from 'moment';
 import {ReplyType} from '@/model/reply';
-import {Avatar, Button, Comment, message, Space, Tag} from 'antd';
+import {Avatar, Button, Comment, Dropdown, Menu, message, Space, Tag} from 'antd';
 import {CurrentUser} from '@/model/user';
 import {currentUser as queryCurrentUser, searchByUserId} from '@/services/api';
 import {LikeOutlined} from '@ant-design/icons';
-import {deleteReplyByManager, replyLike} from '@/services/reply';
+import {deleteReplyByManager, replyLike, star} from '@/services/reply';
 import {Link} from "umi";
 
 type TopicListContentProps = {
@@ -72,10 +72,41 @@ const ReplyListContent: React.FC<TopicListContentProps> = ({ reply }) => {
     message.success("删除成功");
   }
 
+  const onStar = async ()=>{
+    if(reply.userId === currentUser.id){
+      message.info("不能对自己进行操作")
+    }else{
+      const res = await star(reply);
+      if(res){
+        message.success("设置成功");
+      }
+    }
+  }
+
+  const menu = (
+    <Menu
+      items={[
+        {
+          key: '1',
+          label: reply.isStared ? '取消精选':'设置精选',
+          onClick: ()=> onStar(),
+        },
+        {
+          key: '2',
+          label: '删除',
+          danger: true,
+          onClick: ()=> onDelete(),
+        },
+      ]}
+    />
+  );
+
+
+
   return (
     <Comment
       content={reply.replyContent}
-      datetime={moment(reply.createTime).format('YYYY-MM-DD HH:mm')}
+      datetime={[moment(reply.createTime).format('YYYY-MM-DD HH:mm')]}
       avatar={<Link to={`/us/${user.id}`} target="_blank"><Avatar src={user.avatarUrl} alt={user.username} /></Link>}
       author={<a>{user.username}</a>}
       actions={[
@@ -83,7 +114,16 @@ const ReplyListContent: React.FC<TopicListContentProps> = ({ reply }) => {
         <Button onClick={onClickLikes}>
           <IconText key="like" type="like-o" text={replyLikes} />
         </Button>
-          <a href="#"><Tag visible={currentUser.userRole == 1} onClick={onDelete} color="#f50">删除</Tag></a>
+          <Tag visible={currentUser.userRole===1}>
+          <Dropdown overlay={menu} >
+            <a onClick={e => e.preventDefault()}>
+              <Space>
+                ...
+              </Space>
+            </a>
+          </Dropdown>
+          </Tag>
+          <Tag visible={reply.isStared} color={"green"}>{reply.isStared}</Tag>
         </Space>,
       ]}
     ></Comment>

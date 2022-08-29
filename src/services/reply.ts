@@ -26,7 +26,7 @@ export async function writeReply(body: writeReplyType, options?: { [key: string]
   });
 }
 
-/** 点赞题目 POST /api/reply/like */
+/** 点赞回复 POST /api/reply/like */
 export async function replyLike(body: ReplyType, options?: { [key: string]: any }) {
   return request<ReplyType>('/api/reply/like', {
     method: 'POST',
@@ -70,4 +70,14 @@ export async function deleteReplyByManager(body: ReplyIdType, options?: { [key: 
   });
 }
 
-
+/** 精选或取消回复 POST /api/reply/star */
+export async function star(body: ReplyType, options?: { [key: string]: any }) {
+  return request<ReplyType>('/api/reply/star', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}

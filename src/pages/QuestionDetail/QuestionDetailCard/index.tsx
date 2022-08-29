@@ -1,11 +1,12 @@
-import {Button, Typography} from 'antd';
+import {Button, Dropdown, Menu, Space, Tag, Typography} from 'antd';
 import React, {useState} from 'react';
 import './index.less';
 import {TopicType} from "@/model/topic";
 import {LikeOutlined, MessageOutlined, StarOutlined} from "@ant-design/icons";
-import {getTopicById, topicLike} from "@/services/topicList";
+import {getTopicById, topicLike, topicStar} from "@/services/topicList";
 import message from "antd/es/message";
 import {currentUser as queryCurrentUser} from "@/services/api";
+import {star} from "@/services/reply";
 
 interface QuestionDetailCardProps {
   topic: TopicType;
@@ -58,6 +59,29 @@ const QuestionDetailCard: React.FC<QuestionDetailCardProps> = (props) => {
         return null;
     }
   };
+
+  const onStar = async ()=>{
+    if(topic.userId === currentUser.id){
+      message.info("不能对自己进行操作")
+    }else{
+      const res = await topicStar(topic);
+      if(res){
+        message.success("设置成功");
+      }
+    }
+  }
+
+  const menu = (
+    <Menu
+      items={[
+        {
+          key: '1',
+          label: topic.isStared ? '取消精选':'设置精选',
+          onClick: ()=> onStar(),
+        },
+      ]}
+    />
+  );
   const onClickLikes = async ()=>{
     setLoading(true);
     if ( currentUser.id === topic.userId ){
@@ -91,7 +115,19 @@ const QuestionDetailCard: React.FC<QuestionDetailCardProps> = (props) => {
         {topic.topicContent}
       </Typography.Paragraph>
       <Typography.Paragraph>
+        <Space>
         <Button loading={loading} onClick={onClickLikes}><IconText key="like" type="like-o" text={topicLikes}/></Button>
+        <Tag visible={currentUser.userRole===1}>
+          <Dropdown overlay={menu} >
+            <a onClick={e => e.preventDefault()}>
+              <Space>
+                ...
+              </Space>
+            </a>
+          </Dropdown>
+        </Tag>
+        <Tag visible={topic.isStared} color={"green"}>{topic.isStared}</Tag>
+        </Space>
       </Typography.Paragraph>
     </div>
   );

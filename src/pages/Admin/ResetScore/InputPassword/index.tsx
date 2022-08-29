@@ -33,7 +33,7 @@ const InputPassword: React.FC<InputPasswordProps> = (props) => {
       message.success("重置成功")
       onClose();
     }else{
-      message.error("重置失败")
+      message.error(res)
     }
   }
   const doCancel = () => {

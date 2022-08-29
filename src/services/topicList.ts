@@ -88,3 +88,15 @@ export async function deleteTopicByManager(body: API.TopicIdType,options?: { [ke
     ...(options || {}),
   });
 }
+
+/** 精选题目 POST /api/topic/star */
+export async function topicStar(body: TopicType,options?: { [key: string]: any }) {
+  return request<TopicType>('/api/topic/star', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
