@@ -1,6 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
-import {request} from 'umi';
+import request from '@/plugins/gllobalRequest';
 
 /** 获取当前的用户 GET /api/user/currentUser */
 export async function currentUser(options?: { [key: string]: any }) {
