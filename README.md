@@ -1,7 +1,6 @@
 # SUIBE MMA [![OSCS Status](https://www.oscs1024.com/platform/badge/suibemath/webpage.svg?size=small)](https://www.oscs1024.com/project/suibemath/webpage?ref=badge_small)
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
-
+该项目由上海对外经贸大学数学建模协会开发
 ## Environment Prepare
 
 Install `node_modules`:
@@ -16,11 +15,6 @@ or
 yarn
 ```
 
-## Provided Scripts
-
-Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
-
-Scripts provided in `package.json`. It's safe to modify or add additional script:
 
 ### Start project
 
@@ -54,4 +48,4 @@ npm test
 
 ## More
 
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+项目后端[地址](https://github.com/suibemath/suibe_mma)
