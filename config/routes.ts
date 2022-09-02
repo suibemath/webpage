@@ -22,6 +22,23 @@ export default [
     name: '首页',
     icon: 'smile',
     path: '/welcome',
+    routes: [
+      {
+        path: 'welcome/home',
+        name:'欢迎',
+        component: './Welcome/Home'
+      },
+      {
+        path: 'welcome/rule',
+        name:'规则',
+        component: './Welcome/Rule'
+      },
+    ]
+  },
+  {
+    name: '题目',
+    icon: 'database',
+    path: '/topics',
     component: './TopciList',
   },
   {
@@ -112,7 +129,7 @@ export default [
   },
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/welcome/home',
   },
   {
     routes: [

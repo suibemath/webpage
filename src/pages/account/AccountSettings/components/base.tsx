@@ -85,26 +85,14 @@ const BaseView: React.FC = () => {
                 name="email"
                 label="邮箱"
                 placeholder={currentUser.email}
-                rules={[
-                  {
-                    required: true,
-                    message: '请输入您的邮箱',
-                  },
-                ]}
               />
               <ProFormText
                 width="md"
                 name="username"
                 label="昵称"
                 placeholder={currentUser.username}
-                rules={[
-                  {
-                    required: true,
-                    message: '请输入您的昵称!',
-                  },
-                ]}
               />
-              <Form.Item name="gender" label="性别" rules={[{ required: true }]}>
+              <Form.Item name="gender" label="性别">
                 <Select placeholder={currentUser.gender ? '女':'男'} allowClear>
                   <Option value="♂">男</Option>
                   <Option value="♀">女</Option>
@@ -113,12 +101,6 @@ const BaseView: React.FC = () => {
               <ProFormTextArea
                 name="selfIntroduction"
                 label="个人简介"
-                rules={[
-                  {
-                    required: true,
-                    message: '请输入个人简介!',
-                  },
-                ]}
                 placeholder={!currentUser.selfIntroduction ? '个人简介': currentUser.selfIntroduction}
               />
             </ProForm>

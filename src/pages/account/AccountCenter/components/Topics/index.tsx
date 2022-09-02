@@ -1,6 +1,6 @@
 import React from 'react';
 import {LikeOutlined, MessageFilled} from '@ant-design/icons';
-import {List, Tag} from 'antd';
+import {List, Space, Tag} from 'antd';
 import type {ListItemDataType} from '../../data.d';
 import styles from './index.less';
 import {getMyTopic} from '@/services/topicList';
@@ -44,17 +44,12 @@ const Articles: React.FC = () => {
         >
           <List.Item.Meta
             title={
-              <Link
-                className={styles.listItemMetaTitle}
-                to={`/qd/${item.topicId}`}
-              >
-                {item.topicTitle}
-              </Link>
-            }
-            description={
-              <Tag visible={item.isStared} color={'red'}>
-                {item.isStared}
-              </Tag>
+              <Space>
+                <Tag visible={item.isStared} color={"green"}>{item.isStared}</Tag>
+                <Link className={styles.listItemMetaTitle} to={`/qd/${item.topicId}`}>
+                  {item.topicTitle}
+                </Link>
+              </Space>
             }
           />
           <TopicAccountContent data={item} />

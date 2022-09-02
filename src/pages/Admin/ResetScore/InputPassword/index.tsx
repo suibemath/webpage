@@ -29,11 +29,11 @@ const InputPassword: React.FC<InputPasswordProps> = (props) => {
       userRole: currentUser.userRole,
       userPassword: userPassword,
     })
-    if (res === '重置总积分成功'){
+    if (res.message === '重置总积分成功'){
       message.success("重置成功")
       onClose();
     }else{
-      message.error(res)
+      message.error(res.message)
     }
   }
   const doCancel = () => {

@@ -44,7 +44,7 @@ export async function login(body: API.LoginParams, options?: { [key: string]: an
 
 /** 注册接口 POST /api/user/register */
 export async function register(body: API.RegisterParams, options?: { [key: string]: any }) {
-  return request<API.RegisterResult>('/api/user/register', {
+  return request<API.StringResult>('/api/user/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export async function register(body: API.RegisterParams, options?: { [key: strin
 
 /** 注册接口 POST /api/user/changePassword */
 export async function changePassword(body: API.ChangePasswordParams, options?: { [key: string]: any }) {
-  return request<string>('/api/user/changePassword', {
+  return request<API.StringResult>('/api/user/changePassword', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ export async function recaptureManager(body: API.UserIdType, options?: { [key: s
 
 /** 解除管理员接口 POST /api/user/scoreReset */
 export async function scoreReset(body: API.ResetScore, options?: { [key: string]: any }) {
-  return request<string>('/api/user/scoreReset', {
+  return request<API.StringResult>('/api/user/scoreReset', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

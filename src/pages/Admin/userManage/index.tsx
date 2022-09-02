@@ -3,7 +3,6 @@ import React, {useRef} from 'react';
 import {getAllUsers, giveManager, recaptureManager, scoreChange, sealUser, unsealUser} from "@/services/api";
 import {Dropdown, Menu, message, Space, Tag} from "antd";
 import {DownOutlined} from '@ant-design/icons';
-import {Link} from "umi";
 
 type ItemType = {
   id: number;
@@ -176,9 +175,6 @@ const QuestionDetail: React.FC = () => {
             </Space>
           </a>
         </Dropdown>,
-        <Link  to={`/us/${record.id}`} target="_blank">
-          查看
-        </Link>,
         <TableDropdown
           key="actionGroup"
           onSelect={() => action?.reload()}

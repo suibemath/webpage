@@ -83,10 +83,7 @@ const QuestionDetail: React.FC = () => {
               上传者：
               <Space>
                 <Avatar src={user.avatarUrl} />
-                <Link to={`/us/${user.id}`} target="_blank">
                   <span>{user.username}  {user.gender}</span>
-                </Link>
-
               </Space>
             </p>
           </Card>

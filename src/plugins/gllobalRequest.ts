@@ -3,6 +3,7 @@
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
 import {extend} from 'umi-request';
+import {message} from "antd";
 
 
 /**
@@ -10,24 +11,10 @@ import {extend} from 'umi-request';
  */
 const request = extend({
   credentials: 'include', // 默认请求是否带上cookie
-  prefix: process.env.NODE_ENV === 'production' ? 'http://124.220.200.2:8080' : undefined
+  prefix: process.env.NODE_ENV === 'production'? 'http://suibe.sunniverse.cn' : undefined
   // requestType: 'form',
 });
 
-/**
- * 所以请求拦截器
- */
-request.interceptors.request.use((url, options): any => {
-  return {
-    url,
-    options: {
-      ...options,
-      headers: {
-
-      },
-    },
-  };
-});
 
 /**
  * 所有响应拦截器
@@ -35,7 +22,9 @@ request.interceptors.request.use((url, options): any => {
 request.interceptors.response.use(async (response, options): Promise<any> => {
 
   const res = await response.clone().json();
-  if (res.code === 0){
+  if (res === null){
+    message.error("操作失败")
+    return response;
   }
   return response;
 });

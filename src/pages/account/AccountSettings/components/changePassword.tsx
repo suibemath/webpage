@@ -31,13 +31,13 @@ const PasswordView: React.FC = () => {
       newPassword: newPassword,
       newCheckPassword: newCheckPassword,
     })
-    if (res === '修改密码成功') {
+    if (res.message === '修改密码成功') {
       message.success('更新密码成功');
       const newCurrentUser = await fetchUserInfo();
       setInitialState({ ...initialState, currentUser: newCurrentUser });
     }
     else{
-      message.error('修改信息失败');
+      message.error(res.message);
     }
   };
   return (

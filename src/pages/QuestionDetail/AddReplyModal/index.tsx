@@ -46,12 +46,12 @@ const AddReplyModal: React.FC<AddCommentModalProps> = (props) => {
       topicId,
       userId: currentUser.id,
     });
-    if (res === '回复成功') {
+    if (res.message === '回复成功') {
       message.success('回复成功，恭喜你获得5点积分');
       setSubmitting(false);
       onClose();
     } else {
-      message.error('回答失败，请重试！');
+      message.error(res.message);
       setSubmitting(false);
     }
   };

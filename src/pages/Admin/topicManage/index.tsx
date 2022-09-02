@@ -81,9 +81,6 @@ const topicManage: React.FC = () => {
       valueType: 'option',
       key: 'option',
       render: (text, record) => [
-        <Link  to={`/qd/${record.topicId}`} target="_blank">
-          查看
-        </Link>,
         <a onClick={()=> DeleteTopic(record.topicId)}>
           删除
         </a>,

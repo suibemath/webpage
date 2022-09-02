@@ -26,12 +26,12 @@ const AddTopics: React.FC = () => {
       topicContent: topicContent,
       userId: currentUser.id,
     });
-    if (res == '上传成功') {
-      message.success(res+"，恭喜你获得10点积分");
+    if (res.message === '上传成功') {
+      message.success("上传成功，恭喜你获得10点积分");
       const newCurrentUser = await fetchUserInfo();
       setInitialState({ ...initialState, currentUser: newCurrentUser });
     } else {
-      message.error('上传失败，请刷新重试');
+      message.error(res.message);
     }
   };
 

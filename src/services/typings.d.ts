@@ -44,7 +44,9 @@ declare namespace API {
     currentAuthority?: string;
   };
 
-  type RegisterResult = string;
+  type StringResult = {
+    message?: string;
+  };
 
   type PageParams = {
     current?: number;

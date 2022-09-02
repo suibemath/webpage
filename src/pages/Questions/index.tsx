@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Card, List, message, Tag} from 'antd';
+import {Card, List, message, Space, Tag} from 'antd';
 import {useModel} from '@@/plugin-model/useModel';
 import type {CurrentUser} from '@/model/user';
 import './style.less';
@@ -127,9 +127,12 @@ const Questions: React.FC<QuestionsProps> = (props) => {
             >
               <List.Item.Meta
                 title={
-                  <Link className={styles.listItemMetaTitle} to={`/qd/${item.topicId}`}>
-                    {item.topicTitle}
-                  </Link>
+                  <Space>
+                    <Tag visible={item.isStared} color={"green"}>{item.isStared}</Tag>
+                    <Link className={styles.listItemMetaTitle} to={`/qd/${item.topicId}`}>
+                      {item.topicTitle}
+                    </Link>
+                  </Space>
                 }
                 description={
                   <Tag visible={item.isStared} color={"red"}>{item.isStared}</Tag>

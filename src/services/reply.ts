@@ -16,7 +16,7 @@ export async function getReply(body: TopicType, options?: { [key: string]: any }
 
 /** 根据题目获取用户信息 POST /api/reply/writeReply */
 export async function writeReply(body: writeReplyType, options?: { [key: string]: any }) {
-  return request<Replyres>('/api/reply/writeReply', {
+  return request<API.StringResult>('/api/reply/writeReply', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
