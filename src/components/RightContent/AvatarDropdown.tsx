@@ -1,10 +1,10 @@
-import {logout} from '@/services/api';
-import {LogoutOutlined, SettingOutlined, UserOutlined} from '@ant-design/icons';
-import {Avatar, Menu, Spin} from 'antd';
-import type {ItemType} from 'antd/lib/menu/hooks/useItems';
-import type {MenuInfo} from 'rc-menu/lib/interface';
-import React, {useCallback} from 'react';
-import {history, useModel} from 'umi';
+import { logout } from '@/services/api';
+import { BellOutlined, LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Badge, Menu, Spin } from 'antd';
+import type { ItemType } from 'antd/lib/menu/hooks/useItems';
+import type { MenuInfo } from 'rc-menu/lib/interface';
+import React, { useCallback } from 'react';
+import { history, useModel } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
@@ -82,6 +82,11 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
             label: '个人中心',
           },
           {
+            key: 'messages',
+            icon: <BellOutlined />,
+            label: ['我的消息', <Badge dot />],
+          },
+          {
             type: 'divider' as const,
           },
         ]
@@ -91,7 +96,11 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
       icon: <UserOutlined />,
       label: '个人中心',
     },
-
+    {
+      key: 'messages',
+      icon: <BellOutlined />,
+      label: ['我的消息', <Badge dot />],
+    },
     {
       key: 'settings',
       icon: <SettingOutlined />,

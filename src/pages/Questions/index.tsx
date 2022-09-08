@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {Card, List, message, Space, Tag} from 'antd';
-import {useModel} from '@@/plugin-model/useModel';
-import type {CurrentUser} from '@/model/user';
+import React, { useEffect, useState } from 'react';
+import { Card, List, message, Space, Tag } from 'antd';
+import { useModel } from '@@/plugin-model/useModel';
+import type { CurrentUser } from '@/model/user';
 import './style.less';
-import {Link} from "umi";
-import styles from "@/pages/TopciList/style.less";
-import TopicListContent from "@/pages/TopciList/components/TopicListContent";
-import {LikeOutlined, MessageOutlined, StarOutlined} from "@ant-design/icons";
-import {searchTitle} from "@/services/topicList";
+import { Link } from 'umi';
+import styles from '@/pages/TopciList/style.less';
+import TopicListContent from '@/pages/TopciList/components/TopicListContent';
+import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
+import { searchTitle } from '@/services/topicList';
 
 interface QuestionsProps {
   location: {
@@ -39,7 +39,7 @@ export interface ListItemDataType {
  * @author liyupi
  */
 const Questions: React.FC<QuestionsProps> = (props) => {
-  const { location} = props;
+  const { location } = props;
   const searchText = location.query.q;
   const { initialState } = useModel('@@initialState');
   const { currentUser = {} as CurrentUser } = initialState || {};
@@ -64,26 +64,26 @@ const Questions: React.FC<QuestionsProps> = (props) => {
   const IconText: React.FC<{
     type: string;
     text: React.ReactNode;
-  }> = ({type, text}) => {
+  }> = ({ type, text }) => {
     switch (type) {
       case 'star-o':
         return (
           <span>
-            <StarOutlined style={{marginRight: 8}}/>
+            <StarOutlined style={{ marginRight: 8 }} />
             {text}
           </span>
         );
       case 'like-o':
         return (
           <span>
-            <LikeOutlined style={{marginRight: 8}}/>
+            <LikeOutlined style={{ marginRight: 8 }} />
             {text}
           </span>
         );
       case 'message':
         return (
           <span>
-            <MessageOutlined style={{marginRight: 8}}/>
+            <MessageOutlined style={{ marginRight: 8 }} />
             {text}
           </span>
         );
@@ -101,16 +101,16 @@ const Questions: React.FC<QuestionsProps> = (props) => {
   return (
     <>
       <Card
-        style={{marginTop: 24}}
+        style={{ marginTop: 24 }}
         bordered={false}
-        bodyStyle={{padding: '8px 32px 32px 32px'}}
+        bodyStyle={{ padding: '8px 32px 32px 32px' }}
       >
         <List<ListItemDataType>
           size="large"
           rowKey="topicId"
           itemLayout="vertical"
           pagination={{
-            onChange: page => {
+            onChange: (page) => {
               console.log(page);
             },
             pageSize: 10,
@@ -118,27 +118,26 @@ const Questions: React.FC<QuestionsProps> = (props) => {
           dataSource={list}
           renderItem={(item) => (
             <List.Item
-              style={{whiteSpace:'pre-wrap'}}
+              style={{ whiteSpace: 'pre-wrap' }}
               key={item.topicId}
               actions={[
-                <IconText key="like" type="like-o" text={item.topicLikes}/>,
-                <IconText key="message" type="message" text={item.replyNum}/>,
+                <IconText key="like" type="like-o" text={item.topicLikes} />,
+                <IconText key="message" type="message" text={item.replyNum} />,
               ]}
             >
               <List.Item.Meta
                 title={
                   <Space>
-                    <Tag visible={item.isStared} color={"green"}>{item.isStared}</Tag>
+                    <Tag visible={item.isStared} color={'green'}>
+                      {item.isStared}
+                    </Tag>
                     <Link className={styles.listItemMetaTitle} to={`/qd/${item.topicId}`}>
                       {item.topicTitle}
                     </Link>
                   </Space>
                 }
-                description={
-                  <Tag visible={item.isStared} color={"red"}>{item.isStared}</Tag>
-                }
               />
-              <TopicListContent data={item}/>
+              <TopicListContent data={item} />
             </List.Item>
           )}
         />

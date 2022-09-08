@@ -19,23 +19,6 @@ export default [
     ],
   },
   {
-    name: '首页',
-    icon: 'smile',
-    path: '/welcome',
-    routes: [
-      {
-        path: 'welcome/home',
-        name:'欢迎',
-        component: './Welcome/Home'
-      },
-      {
-        path: 'welcome/rule',
-        name:'规则',
-        component: './Welcome/Rule'
-      },
-    ]
-  },
-  {
     name: '题目',
     icon: 'database',
     path: '/topics',
@@ -48,15 +31,15 @@ export default [
     routes: [
       {
         path: 'rank/month',
-        name:'月排名',
-        component: './Rank/MonthRank'
-    },
+        name: '月排名',
+        component: './Rank/MonthRank',
+      },
       {
         path: 'rank/total',
         name: '总排名',
-        component: './Rank/TotalRank'
-      }
-    ]
+        component: './Rank/TotalRank',
+      },
+    ],
   },
   {
     path: '/account',
@@ -73,6 +56,11 @@ export default [
         icon: 'smile',
         path: '/account/center',
         component: './account/AccountCenter',
+      },
+      {
+        name: '消息中心',
+        path: '/account/messages',
+        component: './Messages',
       },
       {
         component: './404',
@@ -129,7 +117,7 @@ export default [
   },
   {
     path: '/',
-    redirect: '/welcome/home',
+    redirect: '/topics',
   },
   {
     routes: [

@@ -1,6 +1,6 @@
 import type { Settings as ProSettings } from '@ant-design/pro-layout';
 import React, { useState } from 'react';
-import { Button, Dropdown, Menu } from 'antd';
+import { Button } from 'antd';
 import AvatarDropdown from './AvatarDropdown';
 import HeaderSearch from '@/components/HeaderSearch';
 import { Link, useLocation } from 'umi';
@@ -18,15 +18,6 @@ const GlobalHeaderRight: React.FC<GlobalHeaderRightProps> = () => {
   // @ts-ignore
   const [searchText, setSearchText] = useState<string>(location.query.q);
 
-  const menu = (
-    <Menu>
-      <Menu.Item key="1">
-        <Link to="/addtopics" target="_blank">
-          上传题目
-        </Link>
-      </Menu.Item>
-    </Menu>
-  );
   return (
     <div className={styles.right}>
       <div style={{ width: '40vw' }}>
@@ -37,17 +28,15 @@ const GlobalHeaderRight: React.FC<GlobalHeaderRightProps> = () => {
         />
       </div>
       {!isMobile() && (
-        <Dropdown overlay={menu} placement="bottomCenter">
-          <Link to="/addtopics" target="_blank">
-            <Button
-              type="primary"
-              className="uploadDropdown"
-              style={{ marginLeft: 24, marginRight: 8 }}
-            >
-              上传
-            </Button>
-          </Link>
-        </Dropdown>
+        <Link to="/addtopics" target="_blank">
+          <Button
+            type="primary"
+            className="uploadDropdown"
+            style={{ marginLeft: 24, marginRight: 8 }}
+          >
+            上传
+          </Button>
+        </Link>
       )}
       <AvatarDropdown />
     </div>
