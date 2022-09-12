@@ -1,63 +1,56 @@
-import { Card, Col, Row } from 'antd';
-import React, { useState } from 'react';
-import { GridContent } from '@ant-design/pro-layout';
-import type { RouteChildrenProps } from 'react-router';
-import Topics from './components/Topics';
-import type { tabKeyType } from './data.d';
+import {Card} from 'antd';
+import React, {useState} from 'react';
+import type {RouteChildrenProps} from 'react-router';
+import UnRead from './components/UnRead';
+import type {tabKeyType} from './data.d';
 import styles from './Center.less';
-import Answers from '@/pages/account/AccountCenter/components/Answers';
+import Read from "@/pages/account/Messages/components/Read";
 
 const operationTabList = [
   {
-    key: 'topics',
+    key: 'unRead',
     tab: (
       <span>
-        我的题目<span style={{ fontSize: 14 }}></span>
+        未读信息<span style={{ fontSize: 14 }}></span>
       </span>
     ),
   },
   {
-    key: 'answers',
+    key: 'read',
     tab: (
       <span>
-        我的回复<span style={{ fontSize: 14 }}></span>
+        已读信息<span style={{ fontSize: 14 }}></span>
       </span>
     ),
   },
 ];
 
-const AccountCenter: React.FC<RouteChildrenProps> = () => {
-  const [tabKey, setTabKey] = useState<tabKeyType>('topics');
+const Messages: React.FC<RouteChildrenProps> = () => {
+  const [tabKey, setTabKey] = useState<tabKeyType>('unRead');
 
   // 渲染tab切换
   const renderChildrenByTabKey = (tabValue: tabKeyType) => {
-    if (tabValue === 'topics') {
-      return <Topics />;
+    if (tabValue === 'unRead') {
+      return <UnRead />;
     }
-    if (tabValue === 'answers') {
-      return <Answers />;
+    if (tabValue === 'read') {
+      return <Read />;
     }
     return null;
   };
 
   return (
-    <GridContent>
-      <Row gutter={24}>
-        <Col lg={17} md={24}>
-          <Card
-            className={styles.tabsCard}
-            bordered={false}
-            tabList={operationTabList}
-            activeTabKey={tabKey}
-            onTabChange={(_tabKey: string) => {
-              setTabKey(_tabKey as tabKeyType);
-            }}
-          >
-            {renderChildrenByTabKey(tabKey)}
-          </Card>
-        </Col>
-      </Row>
-    </GridContent>
+    <Card
+      className={styles.tabsCard}
+      bordered={false}
+      tabList={operationTabList}
+      activeTabKey={tabKey}
+      onTabChange={(_tabKey: string) => {
+        setTabKey(_tabKey as tabKeyType);
+      }}
+    >
+      {renderChildrenByTabKey(tabKey)}
+    </Card>
   );
 };
-export default AccountCenter;
+export default Messages;

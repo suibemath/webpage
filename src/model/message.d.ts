@@ -9,6 +9,16 @@ export interface MessageType {
   isDelete: boolean;
   isRead: boolean;
   sendDelete: boolean;
+  receiveDelete: boolean;
   createTime: Date;
   updateTime: Date;
+}
+
+export interface ReportType {
+  messageContent: string;
+  sendId: number;
+}
+
+export interface MessageIdType {
+  messageId: number;
 }

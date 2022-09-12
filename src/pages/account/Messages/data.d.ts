@@ -1,4 +1,4 @@
-export type tabKeyType = 'topics' | 'answers';
+export type tabKeyType = 'unRead' | 'read';
 export interface TagType {
   key: string;
   label: string;

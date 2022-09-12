@@ -60,7 +60,7 @@ export default [
       {
         name: '消息中心',
         path: '/account/messages',
-        component: './Messages',
+        component: './account/Messages',
       },
       {
         component: './404',
@@ -98,9 +98,21 @@ export default [
     ],
   },
   {
+    name: '联系管理员',
+    icon: 'database',
+    path: '/contact',
+    component: './ContactManager',
+  },
+  {
     name: '题目详情',
     path: '/qd/:id',
     component: './QuestionDetail',
+    hideInMenu: true,
+  },
+  {
+    name: '消息详情',
+    path: '/ms/:id',
+    component: './MessageDetail',
     hideInMenu: true,
   },
   {

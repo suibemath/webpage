@@ -51,14 +51,14 @@ export type Member = {
 };
 
 export interface ListItemDataType {
-  topicId: number;
-  topicTitle?: string;
-  topicContent: string;
-  topicLikes: number;
-  isStared: boolean;
-  userId: number;
-  replyNum: number;
-  isDelete: boolean;
+  messageId: number;
+  messageContent: string;
+  sendId: number;
   createTime: Date;
   updateTime: Date;
+  receiveId: number;
+  isDelete: boolean;
+  isRead: boolean;
+  sendDelete: boolean;
+  receiveDelete: boolean;
 }

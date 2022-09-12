@@ -6,7 +6,6 @@ import {LikeOutlined, MessageOutlined, StarOutlined} from "@ant-design/icons";
 import {getTopicById, topicLike, topicStar} from "@/services/topicList";
 import message from "antd/es/message";
 import {currentUser as queryCurrentUser} from "@/services/api";
-import {star} from "@/services/reply";
 
 interface QuestionDetailCardProps {
   topic: TopicType;
@@ -126,7 +125,6 @@ const QuestionDetailCard: React.FC<QuestionDetailCardProps> = (props) => {
             </a>
           </Dropdown>
         </Tag>
-        <Tag visible={topic.isStared} color={"green"}>{topic.isStared}</Tag>
         </Space>
       </Typography.Paragraph>
     </div>

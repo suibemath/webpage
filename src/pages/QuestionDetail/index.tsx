@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router";
-import {Avatar, message, Row, Space, Tag} from "antd";
+import {Avatar, Button, message, Row, Space, Tag} from "antd";
 import {getTopic} from "@/services/topicList";
 import {TopicType} from "@/model/topic";
 import {CurrentUser} from "@/model/user";
@@ -11,7 +11,7 @@ import {formatPartDateTimeStr} from '@/utils/utils';
 import {GridContent} from '@ant-design/pro-components';
 import QuestionDetailCard from "@/pages/QuestionDetail/QuestionDetailCard";
 import ReplyList from "@/pages/QuestionDetail/ReplyList";
-import {Link} from "umi";
+import AddReportModal from "@/components/AddReportModal";
 
 
 const QuestionDetail: React.FC = () => {
@@ -20,6 +20,8 @@ const QuestionDetail: React.FC = () => {
   const [topic, setTopic] = useState<TopicType>({} as TopicType);
   const [user, setUser] = useState<CurrentUser>({} as CurrentUser);
   const [topicId, setTopicId] = useState<number>(id);
+  const [addModalVisible, setAddModalVisible] = useState<boolean>(false);
+
   useEffect(() => {
     setTopicId(id);
   }, [id]);
@@ -50,7 +52,9 @@ const QuestionDetail: React.FC = () => {
     loadData();
   }, [topicId]);
 
-
+  const clickChange = async () =>{
+    setAddModalVisible(true);
+  }
 
   return (
     <GridContent className="question-detail" style={{ overflowX: 'hidden' }}>
@@ -75,7 +79,14 @@ const QuestionDetail: React.FC = () => {
           <ReplyList topic={topic}/>
         </Col>
         <Col xl={8} lg={24} xs={24}>
-          <Card title="题目信息" bodyStyle={{ paddingBottom: 8 }}>
+          <Card
+            title={[
+              <Space size={"large"}>
+                <div>题目信息</div>
+                <Button onClick={clickChange}>举报</Button>
+              </Space>
+            ]}
+            bodyStyle={{ paddingBottom: 8 }}>
             {topic.createTime && (
               <p>发布时间：{formatPartDateTimeStr(topic?.createTime)}</p>
             )}
@@ -91,7 +102,13 @@ const QuestionDetail: React.FC = () => {
           <div style={{ marginBottom: 24 }} />
         </Col>
       </Row>
+      <AddReportModal
+        topic={topic}
+        visible={addModalVisible}
+        onClose={() => setAddModalVisible(false)}
+      />
     </GridContent>
+
 
   );
 };

@@ -1,42 +1,53 @@
-import {Avatar, Button, Card, Descriptions, message, Space} from 'antd';
+import {Avatar, Card, Descriptions, message, Space, Typography} from 'antd';
 import React, {useEffect, useState} from 'react';
 import type {RouteChildrenProps} from 'react-router';
 import {useParams} from "react-router";
+import moment from "moment";
+import {MessageType} from "@/model/message";
+import {messageRead} from "@/services/message";
+import styles from "@/pages/UserDetail/style.less";
+import Title from "antd/lib/skeleton/Title";
 import {CurrentUser} from "@/model/user";
 import {searchByUserId} from "@/services/api";
-import styles from './style.less';
-import Title from 'antd/lib/skeleton/Title';
-import moment from "moment";
-import AddUserReportModal from "@/components/AddUserReportModal";
 
 
 const UserDetail: React.FC<RouteChildrenProps> = () => {
-  const { id } = useParams<any>();
+  const {id} = useParams<any>();
+  const [msg, setMsg] = useState<MessageType>({} as MessageType);
   const [user, setUser] = useState<CurrentUser>({} as CurrentUser);
   // const [tabKey, setTabKey] = useState<tabKeyType>('topics');
-  const [userId, setUserId] = useState<number>(id);
-  const [addModalVisible, setAddModalVisible] = useState<boolean>(false);
+  const [messageId, setMessageId] = useState<number>(id);
+
 
   useEffect(() => {
-    setUserId(id);
+    setMessageId(id);
   }, [id]);
   const loadData = async () => {
-    if (!userId) {
+    if (!messageId) {
       return;
     }
     const IdType = {
-      userId: userId,
+      messageId: messageId,
     }
-    const res = await searchByUserId(IdType);
+    const res = await messageRead(IdType);
     if (res) {
-      setUser(res);
+      setMsg(res);
+      const userIdType = {
+        userId: res.sendId,
+      }
+      const _user = await searchByUserId(userIdType);
+      if(_user){
+        setUser(_user);
+      }else{
+        message.error("加载失败，请刷新重试")
+      }
     } else {
       message.error('加载失败，请刷新重试');
     }
   };
   useEffect(() => {
     loadData();
-  }, [userId]);
+  }, [messageId]);
 
   const formatDateTimeStr = (time: any, format = 'YYYY-MM-DD HH:mm:ss') => {
     if (!time) {
@@ -45,9 +56,7 @@ const UserDetail: React.FC<RouteChildrenProps> = () => {
     return moment(time).format(format);
   };
 
-  const clickChange = async () =>{
-    setAddModalVisible(true);
-  }
+
 
   return (
     <div>
@@ -71,34 +80,18 @@ const UserDetail: React.FC<RouteChildrenProps> = () => {
         />
       </Card>
       <div style={{ marginTop: 16 }} />
-      <Card
-        title={
-        <Space size={"large"}>
-          <div>信息</div>
-          <Button onClick={clickChange}>举报用户</Button>
-        </Space>
-      }
-      >
+      <Card>
         <Descriptions column={1} labelStyle={{ width: 100, marginBottom: 8 }} colon={false}>
-          <Descriptions.Item label="积分">{user.score}</Descriptions.Item>
-          <Descriptions.Item label="性别">
-            {!user.gender ? '暂无' : user.gender}
+          <Descriptions.Item label="内容">
+            <Typography.Paragraph style={{whiteSpace:'pre-wrap'}}>
+            {msg.messageContent}
+          </Typography.Paragraph>
           </Descriptions.Item>
-          <Descriptions.Item label="简介">{user.selfIntroduction || '暂无'}</Descriptions.Item>
-          <Descriptions.Item label="身份">
-            {user.userRole === 0 ? '协会成员' : '管理员'}
-          </Descriptions.Item>
-          <Descriptions.Item label="邮箱">{user.email || '暂无'}</Descriptions.Item>
-          <Descriptions.Item label="注册时间">
-            {formatDateTimeStr(user.createTime)}
+          <Descriptions.Item label="发送时间">
+            {formatDateTimeStr(msg.createTime)}
           </Descriptions.Item>
         </Descriptions>
       </Card>
-      <AddUserReportModal
-        user={user}
-        visible={addModalVisible}
-        onClose={() => setAddModalVisible(false)}
-      />
     </div>
 
   );
