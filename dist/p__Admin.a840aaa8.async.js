@@ -1,0 +1,1 @@
+(self.webpackChunkant_design_pro=self.webpackChunkant_design_pro||[]).push([[551],{94351:function(c,_,n){"use strict";n.r(_);var t=n(67388),e=n(67294),d=n(85893),a=function(r){var s=r.children;return(0,d.jsx)(t.Oc,{content:" \u8FD9\u4E2A\u9875\u9762\u53EA\u6709 admin \u6743\u9650\u624D\u80FD\u67E5\u770B",children:s})};_.default=a}}]);
