@@ -1,4 +1,4 @@
-import {request} from 'umi';
+import request from '@/plugins/gllobalRequest';
 import {TopicType} from "@/model/topic";
 
 /** 返回所有题目 GET /api/topic/getTotalTopic */

@@ -1,13 +1,12 @@
 import {logout} from '@/services/api';
 import {BellOutlined, LogoutOutlined, SettingOutlined, UserOutlined} from '@ant-design/icons';
-import {Avatar, Badge, Menu, Spin} from 'antd';
+import {Avatar, Menu, Spin} from 'antd';
 import type {ItemType} from 'antd/lib/menu/hooks/useItems';
 import type {MenuInfo} from 'rc-menu/lib/interface';
 import React, {useCallback} from 'react';
 import {history, useModel} from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
-import {getUnRead} from "@/services/message";
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -25,9 +24,6 @@ const loginOut = async () => {
   }
   await logout();
 };
-
-const res = await getUnRead();
-const isNew = !(res.length === 0) ;
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   const { initialState, setInitialState } = useModel('@@initialState');
@@ -89,7 +85,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
           {
             key: 'messages',
             icon: <BellOutlined />,
-            label: ['我的消息', isNew && <Badge dot />],
+            label: ['我的消息'],
           },
           {
             type: 'divider' as const,
@@ -104,7 +100,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
     {
       key: 'messages',
       icon: <BellOutlined />,
-      label: ['我的消息', isNew && <Badge dot />],
+      label: ['我的消息'],
     },
     {
       key: 'settings',

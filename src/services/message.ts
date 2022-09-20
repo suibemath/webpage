@@ -1,4 +1,4 @@
-import {request} from "@@/plugin-request/request";
+import request from '@/plugins/gllobalRequest';
 import {MessageIdType, MessageType, ReportType} from "@/model/message";
 
 

@@ -1,6 +1,6 @@
-import { request } from '@@/plugin-request/request';
-import {ReplyIdType, Replyres, ReplyType, writeReplyType} from '@/model/reply';
-import { TopicType } from '@/model/topic';
+import type {ReplyIdType, ReplyType, writeReplyType} from '@/model/reply';
+import type {TopicType} from '@/model/topic';
+import request from '@/plugins/gllobalRequest';
 
 /** 根据题目获取用户信息 POST /api/reply/getTopicReply */
 export async function getReply(body: TopicType, options?: { [key: string]: any }) {

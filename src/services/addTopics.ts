@@ -1,6 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
-import {request} from 'umi';
+import request from '@/plugins/gllobalRequest';
 import {simpleTopicType} from '@/model/topic';
 
 /** 上传题目接口 POST /api/topic/upload */
