@@ -11,7 +11,7 @@ import {message} from "antd";
  */
 const request = extend({
   credentials: 'include', // 默认请求是否带上cookie
-  prefix: process.env.NODE_ENV === 'production'? 'http://suibe.sunniverse.cn' : undefined
+  prefix: process.env.NODE_ENV === 'production'? 'http://suibemmaback.suibemma.club' : undefined
   // requestType: 'form',
 });
 
