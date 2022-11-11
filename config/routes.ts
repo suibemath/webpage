@@ -19,6 +19,12 @@ export default [
     ],
   },
   {
+    name: '规则',
+    icon: 'diff',
+    path: '/rules',
+    component: './Rules',
+  },
+  {
     name: '题目',
     icon: 'database',
     path: '/topics',
@@ -99,7 +105,7 @@ export default [
   },
   {
     name: '联系管理员',
-    icon: 'database',
+    icon: 'question',
     path: '/contact',
     component: './ContactManager',
   },
