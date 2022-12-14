@@ -25,6 +25,12 @@ export default [
     component: './Rules',
   },
   {
+    name: '报名',
+    icon: 'smile',
+    path: '/sign',
+    component: './Sign',
+  },
+  {
     name: '题目',
     icon: 'database',
     path: '/topics',
@@ -99,6 +105,12 @@ export default [
         component: './Admin/ResetScore',
       },
       {
+        path: '/admin/sign',
+        name: '审核新成员',
+        icon: 'smile',
+        component: './Admin/Sign',
+      },
+      {
         component: './404',
       },
     ],
@@ -113,6 +125,12 @@ export default [
     name: '题目详情',
     path: '/qd/:id',
     component: './QuestionDetail',
+    hideInMenu: true,
+  },
+  {
+    name: '申请表详情',
+    path: '/sg/:id',
+    component: './SignDetail',
     hideInMenu: true,
   },
   {

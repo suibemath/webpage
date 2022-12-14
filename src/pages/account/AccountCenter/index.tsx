@@ -63,7 +63,7 @@ const AccountCenter: React.FC<RouteChildrenProps> = () => {
                 <div className={styles.avatarHolder}>
                   <img alt="" src={currentUser.avatarUrl} />
                   <div className={styles.name}>{currentUser.username} {currentUser.gender}</div>
-                  <div><Tag color="red">{!currentUser.userRole ? '协会会员' : '管理员'}</Tag>积分:{currentUser.score}</div>
+                  <div><Tag color="red">{currentUser.userRole===1 ? '管理员':(currentUser.userRole === 0 ? '普通用户': '协会成员')}</Tag>积分:{currentUser.score}</div>
                   <div>个人简介:  {!currentUser.selfIntroduction ? '这个人很懒没有简介~' : currentUser.selfIntroduction}</div>
                 </div>
                 <Divider dashed />

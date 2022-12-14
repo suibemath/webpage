@@ -86,7 +86,7 @@ const UserDetail: React.FC<RouteChildrenProps> = () => {
           </Descriptions.Item>
           <Descriptions.Item label="简介">{user.selfIntroduction || '暂无'}</Descriptions.Item>
           <Descriptions.Item label="身份">
-            {user.userRole === 0 ? '协会成员' : '管理员'}
+            {user.userRole===1 ? '管理员':(user.userRole === 0 ? '普通用户': '协会成员')}
           </Descriptions.Item>
           <Descriptions.Item label="邮箱">{user.email || '暂无'}</Descriptions.Item>
           <Descriptions.Item label="注册时间">

@@ -104,7 +104,7 @@ const QuestionDetail: React.FC = () => {
       },
       render: (_, record) => (
         <Space>
-          <Tag key={record.userRole===1 ? '管理员':'协会成员'} color="#108ee9">{record.userRole===1 ? '管理员':'协会成员'}</Tag>
+          <Tag key={record.userRole===1 ? '管理员':(record.userRole === 0 ? '普通用户': '协会成员')} color="#108ee9">{record.userRole===1 ? '管理员':(record.userRole === 0 ? '普通用户': '协会成员')}</Tag>
           <Tag key={record.userRole===2 ? '':'封禁中'} visible={record.userRole===2} color="#f50">{record.userRole===1 ? '':'封禁中'}</Tag>
         </Space>
       ),
