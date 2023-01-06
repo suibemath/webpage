@@ -22,7 +22,7 @@ const  TotalRank: FC = () => {
               title={
               <Space>
                 <Link to={`/us/${item.id}`}>{item.username}</Link>
-                <Tag color="#108ee9" visible={item.userRole===1} >管理员</Tag>
+                <Tag color="gold" visible={item.userRole===1} >管理员</Tag>
               </Space>
             }
             />
